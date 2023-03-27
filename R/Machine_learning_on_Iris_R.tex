@@ -1,0 +1,913 @@
+\documentclass[border=5mm, convert, usenames, dvipsnames,beamer]{standalone}
+\usetheme{Madrid}
+\usecolortheme{default}
+%Information to be included in the title page:
+\title{Sample title}
+\author{Anonymous}
+\institute{Overleaf}
+\date{2021}
+
+\usepackage[absolute,overlay]{textpos}
+
+\defbeamertemplate*{frametitle}{}[1][]
+{
+    \begin{textblock*}{12cm}(1cm,0.75cm)
+    {\color{purple} \fontsize{20}{43.2} \selectfont \insertframetitle}
+    \end{textblock*}
+    \begin{textblock*}{12cm}(1cm,2.5cm)
+    {\color{purple} \fontsize{20}{24} \selectfont \insertframesubtitle}
+    \end{textblock*}
+}
+
+
+\usepackage{ragged2e}
+
+\justifying
+\usepackage{lmodern}
+\usepackage{ImageMagick}
+\usepackage[utf8] {inputenc}
+\usefonttheme[onlymath]{serif}
+\usepackage[english] {label}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage[round] {natbib}
+\usepackage{color}     
+\usepackage{changepage}
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{listings}
+\usepackage[svgnames]{xcolor}
+\usepackage{url}
+\urldef\myurl\url{foo%.com}
+\usepackage{hyperref}
+
+
+
+\setbeamertemplate{footline}[frame number]
+
+\lstdefinestyle{R} {language=R,
+    stringstyle=\color{DarkGreen},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{teal},    
+    basicstyle=\ttfamily\tiny,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=3pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=1
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+
+\lstdefinestyle{Python} {language=Python,
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\tiny,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=3pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=1}
+
+
+
+
+\def\one{\mbox{1\hspace{-4.25pt}\fontsize{12}{14.4}\selectfont\textrm{1}}} % 11pt 
+
+\makeatletter
+\setbeamertemplate{frametitle}[default]{}
+\makeatother
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+
+\begin{document}
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Visualization of Iris dataset}
+
+\vspace{40}
+\noindent
+
+\vspace{-5mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{summaryofdistributions}
+\end{center}
+\end{figure}
+
+
+
+
+
+
+
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Scatterplots with marginal densities}
+
+\vspace{40}
+\noindent
+
+\vspace{0mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{Rplot2}
+\end{center}
+\end{figure}
+
+\end{frame}
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Some metrics}
+
+\vspace{40}
+\noindent
+
+\tiny
+
+$TP =$ true positive, $TN =$ true negative, $FP = $ false positive, $FN =$ false negative
+
+\vspace{10}
+\noindent
+Accuracy. The number of samples correctly classified out of all the samples present in the (test) set.
+
+$$
+Accuracy= \frac{TP + TN}{(TP + TN +FP + FN)}
+$$
+
+\vspace{10}
+\noindent
+Precision (for the positive class). The number of samples actually belonging to the positive class out of all the samples that were predicted to be of the positive class by the model.
+
+$$
+Precision = \frac{TP}{(TP +FP)}
+$$
+
+\vspace{10}
+\noindent
+Recall (for the positive class). The number of samples predicted correctly to be belonging to the positive class out of all the samples that actually belong to the positive class.
+
+$$
+Recall = \frac{TP}{(TP +NP)}
+$$
+
+\vspace{10}
+\noindent
+F1-Score (for the positive class). The harmonic mean of the precision and recall scores obtained for the positive class.
+
+$$
+F1-score = \frac{2 * Precision * Recall}{(Precision + Recall)}
+$$
+
+
+
+\par
+
+
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Naïve Bayes: confusion matrix}
+
+\vspace{40}
+\noindent
+
+\vspace{0mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{cfnb2}
+\end{center}
+\end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Naïve Bayes: code chunk and metrics}
+
+\vspace{20}
+\noindent
+
+
+\begin{lstlisting}[style=R]
+library(klaR) 
+
+# 1. Build a Naive Bayes Classifier
+set.seed(2023)
+nb_model <- NaiveBayes(Species ~ ., data=training) # train Naïve Bayes model
+pred_nb <- predict(nb_model, testing) # apply Naïve Bayes model on test set
+pred_nb_training <- predict(nb_model, training) # apply Naïve Bayes model on train set
+\end{lstlisting}
+
+
+% latex table generated in R 4.2.3 by xtable 1.8-4 package
+% Mon Mar 27 13:33:43 2023
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrr}
+  \hline
+ & Training & Testing \\ 
+  \hline
+accuracy & 94.90 & 98.08 \\ 
+  precision & 94.91 & 97.92 \\ 
+  recall & 94.99 & 98.25 \\ 
+  f1-score & 94.95 & 98.08 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Random Forest: confusion matrix}
+
+\vspace{40}
+\noindent
+
+\vspace{-5mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{cmrf2}
+\end{center}
+\end{figure}
+
+
+
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Random Forest: code chunk and metrics}
+
+\vspace{20}
+\noindent
+
+
+\begin{lstlisting}[style=R]
+library(randomForest)
+
+# 1. Build a Random Forest learning tree Classifier
+set.seed(2023)
+rf_model <- randomForest(Species~., data=training, ntree=100,proximity=TRUE) # train RF model
+pred_rf <- predict(rf_model, testing) # apply RF model on test set
+pred_rf_training <- predict(rf_model, training) # apply RF model on train set
+\end{lstlisting}
+
+
+% latex table generated in R 4.2.3 by xtable 1.8-4 package
+% Mon Mar 27 13:44:30 2023
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrr}
+  \hline
+ & Training & Testing \\ 
+  \hline
+accuracy & 100.00 & 96.15 \\ 
+  precision & 100.00 & 96.02 \\ 
+  recall & 100.00 & 96.02 \\ 
+  f1-score & 100.00 & 96.02 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+
+\end{frame}
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Logistic Regression: confusion matrix}
+
+\vspace{40}
+\noindent
+
+\vspace{-5mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{cmlr2}
+\end{center}
+\end{figure}
+
+\end{frame}
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Logistic Regression: code chunk \\ and metrics}
+
+\vspace{30}
+\noindent
+
+
+\begin{lstlisting}[style=R]
+library(stats4) 
+library(splines) 
+library(VGAM) 
+
+# 1. Build a Multinomial Logistic Regression Classifier
+set.seed(2023)
+mlr_model <- vglm(Species ~ ., family=multinomial, training)
+pred_mlr_training<- predict(mlr_model, training, type = "response")
+pred_mlr_testing<- predict(mlr_model, testing, type = "response")
+predictions <- apply(pred_mlr_testing, 1, which.max)
+predictions_training <- apply(pred_mlr_training, 1, which.max)
+\end{lstlisting}
+
+
+% latex table generated in R 4.2.3 by xtable 1.8-4 package
+% Mon Mar 27 14:02:41 2023
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrr}
+  \hline
+ & Training & Testing \\ 
+  \hline
+accuracy & 100.00 & 98.08 \\ 
+  precision & 100.00 & 98.33 \\ 
+  recall & 100.00 & 97.78 \\ 
+  f1-score & 100.00 & 98.05 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\end{frame}
+%------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Support Vector Machines: \\ confusion matrix}
+
+\vspace{40}
+\noindent
+
+\vspace{0mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{cmsvm2}
+\end{center}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Support Vector Machines: \\ code chunk and metrics}
+
+\vspace{30}
+\noindent
+
+
+\begin{lstlisting}[style=R]
+library(e1071)
+
+# 1. Build a Support Vector Machines Classifier
+set.seed(2023)
+svm_model <- svm(Species ~ ., data=training,
+                 kernel="radial") #linear/polynomial/sigmoid
+pred_svm <- predict(svm_model, testing)
+pred_svm_training <- predict(svm_model, training) # apply svm model on train set
+\end{lstlisting}
+
+
+% latex table generated in R 4.2.3 by xtable 1.8-4 package
+% Mon Mar 27 14:14:40 2023
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrr}
+  \hline
+ & Training & Testing \\ 
+  \hline
+accuracy & 96.94 & 96.15 \\ 
+  precision & 97.04 & 96.02 \\ 
+  recall & 96.90 & 96.02 \\ 
+  f1-score & 96.97 & 96.02 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+\end{frame}
+%------------------------------------------------------------------------------------------
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Neural Network: confusion matrix}
+
+\vspace{40}
+\noindent
+
+\vspace{-5mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{cmnn2}
+\end{center}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Neural Networks: \\ code chunk and metrics}
+
+\vspace{40}
+\noindent
+
+
+\begin{lstlisting}[style=R]
+library(neuralnet)
+
+# 1. Build a Neural Network Classifier
+set.seed(2023)
+iris$setosa <- iris$Species=="setosa"
+iris$virginica <- iris$Species == "virginica"
+iris$versicolor <- iris$Species == "versicolor"
+
+# spliting into test and training again because we added variables
+ind <- sample(2, nrow(iris),replace=TRUE,prob=c(0.7,0.3))
+training <- iris[ind==1,] ; testing <- iris[ind==2,]
+
+nn_model <- neuralnet(setosa+versicolor+virginica ~ 
+                        Sepal.Length + Sepal.Width + Petal.Length + Petal.Width, 
+                      data=training, hidden=c(10,10), rep = 5, err.fct = "ce", 
+                      linear.output = F, lifesign = "minimal",
+                      stepmax = 1000000,  threshold = 0.001)
+\end{lstlisting}
+
+
+% latex table generated in R 4.2.3 by xtable 1.8-4 package
+% Mon Mar 27 14:27:47 2023
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrr}
+  \hline
+ & Training & Testing \\ 
+  \hline
+accuracy & 100.00 & 98.08 \\ 
+  precision & 100.00 & 98.33 \\ 
+  recall & 100.00 & 97.78 \\ 
+  f1-score & 100.00 & 98.05 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+
+\end{frame}
+%------------------------------------------------------------------------------------------
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Decision Tree: confusion matrix}
+
+\vspace{40}
+\noindent
+
+\vspace{-5mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{cmdt2}
+\end{center}
+\end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Decision Tree: code chunk and metrics}
+
+\vspace{40}
+\noindent
+
+
+\begin{lstlisting}[style=R]
+library(rpart)
+
+# 1. Build a Decision Tree Classifier
+set.seed(2023)
+dt_model <- rpart(Species ~.,
+                  data = training,
+                  method = "class",
+                  control = rpart.control(cp = 0),
+                  parms = list(split = "information"))
+
+pred_dt_training<- predict(dt_model, training, type = "class")
+pred_dt_testing<- predict(dt_model, testing, type = "class")
+\end{lstlisting}
+
+
+% latex table generated in R 4.2.3 by xtable 1.8-4 package
+% Mon Mar 27 14:43:16 2023
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrr}
+  \hline
+ & Training & Testing \\ 
+  \hline
+accuracy & 100.00 & 100.00 \\ 
+  precision & 100.00 & 100.00 \\ 
+  recall & 100.00 & 100.00 \\ 
+  f1-score & 100.00 & 100.00 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+
+\end{frame}
+%------------------------------------------------------------------------------------------
+
+
+\begin{frame}[ fragile]{}
+\frametitle{XGBoost: confusion matrix}
+
+\vspace{40}
+\noindent
+
+\vspace{-5mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{cmxgb2}
+\end{center}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{XGBoost: code chunk and metrics}
+
+\vspace{30}
+\noindent
+
+
+\begin{lstlisting}[style=R]
+library(xgboost)
+
+# 0. splitting the dataset into training and test sets
+set.seed(2023)
+ind <- sample(2, nrow(iris),replace=TRUE,prob=c(0.7,0.3))
+training <- iris[ind==1,]
+testing <- iris[ind==2,]
+
+xgb_training = xgb.DMatrix(data = as.matrix(training[,-5]), label = training[,5])
+xgb_testing = xgb.DMatrix(data = as.matrix(testing[,-5]), label = testing[,5])
+
+# 1. Build a XGBoost Classifier
+set.seed(2023)
+xgb_model <- xgboost(data=xgb_training, max.depth=3, nrounds=50)
+
+pred_xgb_testing <- predict(xgb_model, xgb_testing)
+pred_y_xgb_testing = as.factor((levels(testing[,5]))[round(pred_xgb_testing)])
+\end{lstlisting}
+
+% latex table generated in R 4.2.3 by xtable 1.8-4 package
+% Mon Mar 27 14:53:37 2023
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrr}
+  \hline
+ & Training & Testing \\ 
+  \hline
+accuracy & 100.00 & 100.00 \\ 
+  precision & 100.00 & 100.00 \\ 
+  recall & 100.00 & 100.00 \\ 
+  f1-score & 100.00 & 100.00 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+
+
+\end{frame}
+%------------------------------------------------------------------------------------------
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Principal Component Analysis}
+
+\vspace{40}
+\noindent
+
+\vspace{0mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{Rplot10}
+\end{center}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{K-means}
+
+\vspace{40}
+\noindent
+
+\vspace{0mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{Rplot11}
+\end{center}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Partitioning Around Medoids}
+
+\vspace{40}
+\noindent
+
+\vspace{0mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{Rplot12}
+\end{center}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Simple Linear Regression}
+
+\vspace{40}
+\noindent
+
+\vspace{0mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{Rplot13}
+\end{center}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Simple Log-Linear Regression}
+
+\vspace{40}
+\noindent
+
+\vspace{0mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{Rplot14}
+\end{center}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Poisson
+ Regression}
+
+\vspace{40}
+\noindent
+
+\vspace{0mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{Rplot15}
+\end{center}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Gamma Regression}
+
+\vspace{40}
+\noindent
+
+\vspace{0mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{Rplot16}
+\end{center}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Nonparametric Kernel Regression}
+
+\vspace{40}
+\noindent
+
+\vspace{0mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{Rplot17}
+\end{center}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[ fragile]{}
+\frametitle{Nonparametric Smoothing Splines \\ Regression}
+
+\vspace{40}
+\noindent
+
+\vspace{0mm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=11cm]{Rplot18}
+\end{center}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[ fragile]{}
+
+\frametitle{References}
+
+\vspace{-30}
+\noindent
+The R Project for Statistical Computing:
+
+\vspace{10}
+\noindent
+\urlf{https://www.r-project.org/}
+
+\vspace{10}
+\noindent
+https://www.v7labs.com/blog/confusion-matrix-guide
+
+
+\end{frame}
+
+\end{document}
